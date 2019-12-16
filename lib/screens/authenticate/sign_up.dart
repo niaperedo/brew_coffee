@@ -1,17 +1,17 @@
 import 'package:brew_coffee/global/constants.dart';
-import 'package:brew_coffee/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:brew_coffee/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class SignUp extends StatefulWidget {
   final Function toggleView;
 
-  SignIn({this.toggleView});
+  SignUp({this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String email = '';
@@ -25,16 +25,16 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Sign In'),
+        title: Text('Sign Up'),
         actions: <Widget>[
-        FlatButton.icon(
-          icon: Icon(Icons.person),
-          label: Text('Sign Up'),
-          onPressed: () {
-            widget.toggleView();
-          },
-        )
-      ],
+          FlatButton.icon(
+            icon: Icon(Icons.person),
+            label: Text('Sign In'),
+            onPressed: () {
+              widget.toggleView();
+            },
+          )
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -45,7 +45,6 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'Email'),
-                validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
                 }
@@ -53,7 +52,6 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'Password'),
-                validator: (val) => val.isEmpty ? 'Enter a password' : null,
                 onChanged: (val) {
                   setState(() => password = val);
                 },
@@ -63,17 +61,17 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                 color: Colors.pink[400],
                 child: Text(
-                  'Sign In',
+                  'Sign Up',
                   style: TextStyle(
                     color: Colors.white
                   )
                 ),
                 onPressed: () async  {
                   if (_formKey.currentState.validate()) {
-                    dynamic result = await _auth.signIn(email, password);
+                    dynamic result = await _auth.signUp(email, password);
 
                     if (result == null) {
-                      setState(() => error = 'invalid email or password');
+                      setState(() => error = 'please supply a valid email');
                     }
                   }
                 },
