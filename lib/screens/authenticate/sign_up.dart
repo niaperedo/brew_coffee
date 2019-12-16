@@ -1,4 +1,5 @@
 import 'package:brew_coffee/global/constants.dart';
+import 'package:brew_coffee/global/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:brew_coffee/services/auth.dart';
 
@@ -17,10 +18,11 @@ class _SignUpState extends State<SignUp> {
   String email = '';
   String password = '';
   String error = '';
+  bool showLoader = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return showLoader ? Loading() : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
@@ -68,11 +70,14 @@ class _SignUpState extends State<SignUp> {
                 ),
                 onPressed: () async  {
                   if (_formKey.currentState.validate()) {
+                    setState(() => showLoader = true);
                     dynamic result = await _auth.signUp(email, password);
 
                     if (result == null) {
-                      setState(() => error = 'please supply a valid email');
+                      setState(() => error = 'invalid email or password');
                     }
+
+                    setState(() => showLoader = false);
                   }
                 },
               ),
