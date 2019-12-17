@@ -2,6 +2,7 @@ import 'package:brew_coffee/global/constants.dart';
 import 'package:brew_coffee/global/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:brew_coffee/services/auth.dart';
+import 'package:brew_coffee/services/database.dart';
 
 class SignUp extends StatefulWidget {
   final Function toggleView;
@@ -74,10 +75,17 @@ class _SignUpState extends State<SignUp> {
                     dynamic result = await _auth.signUp(email, password);
 
                     if (result == null) {
-                      setState(() => error = 'invalid email or password');
+                      setState(() {
+                        error = 'invalid email or password';
+                        showLoader = false;
+                      } );
+                    } else {
+                      await DatabaseService(uid: result.uid).updateUserData(
+                        '0',
+                        'new member',
+                        100
+                      );
                     }
-
-                    setState(() => showLoader = false);
                   }
                 },
               ),

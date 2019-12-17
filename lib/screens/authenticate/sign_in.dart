@@ -76,10 +76,11 @@ class _SignInState extends State<SignIn> {
                     dynamic result = await _auth.signIn(email, password);
 
                     if (result == null) {
-                      setState(() => error = 'invalid email or password');
+                      setState(() {
+                        error = 'invalid email or password';
+                        showLoader = false;
+                      } );
                     }
-
-                    setState(() => showLoader = false);
                   }
                 },
               ),
