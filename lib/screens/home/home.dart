@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:brew_coffee/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:brew_coffee/screens/home/coffee_list.dart';
-import 'package:brew_coffee/models/coffee.dart';
+import 'package:brew_coffee/models/coffees.dart';
 
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
@@ -23,8 +23,8 @@ class Home extends StatelessWidget {
       );
     }
 
-    return StreamProvider<List<Coffee>>.value(
-        value: DatabaseService().coffee,
+    return StreamProvider<List<Coffees>>.value(
+        value: DatabaseService().coffees,
         child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(

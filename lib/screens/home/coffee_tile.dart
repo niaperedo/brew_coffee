@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:brew_coffee/models/coffee.dart';
+import 'package:brew_coffee/models/coffees.dart';
 
 class CoffeeTile extends StatelessWidget {
-  final Coffee coffee;
-  CoffeeTile({this.coffee});
+  final Coffees coffees;
+  CoffeeTile({this.coffees});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,10 @@ class CoffeeTile extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             radius: 25.0,
-            backgroundColor: Colors.brown[coffee.strength],
+            backgroundColor: Colors.brown[coffees.strength],
           ),
-          title: Text(coffee.name),
-          subtitle: Text('Takes ${coffee.sugars} sugar(s)'),
+          title: Text(coffees.name),
+          subtitle: Text('Takes ${coffees.sugars} sugar(s)'),
         ),
       ),
     );

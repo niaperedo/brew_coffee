@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:brew_coffee/models/coffee.dart';
+import 'package:brew_coffee/models/coffees.dart';
 import 'package:provider/provider.dart';
 import 'package:brew_coffee/screens/home/coffee_tile.dart';
 
@@ -11,13 +11,13 @@ class CoffeeList extends StatefulWidget {
 class _CoffeeListState extends State<CoffeeList> {
   @override
   Widget build(BuildContext context) {
-    final coffee = Provider.of<List<Coffee>>(context);
+    final coffee = Provider.of<List<Coffees>>(context);
 
     return ListView.builder(
       itemCount: coffee.length,
       itemBuilder: (context, index) {
         return CoffeeTile(
-          coffee: coffee[index]
+          coffees: coffee[index]
         );
       },
     );
